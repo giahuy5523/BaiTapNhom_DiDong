@@ -1,0 +1,51 @@
+[
+  {
+    "id": 1,
+    "name": "iPhone 15 pro Max",
+    "price": 18000000,
+    "imageUrl": "http://10.0.2.2:5000/images/iphone15promax.jpg",
+    "description": "iPhone 15 Pro Max là điện thoại cao cấp ra mắt năm 2023. Thiết kế hiện đại, màn hình lớn và hiệu năng mạnh mẽ, phù hợp nhu cầu học tập, làm việc và giải trí."
+  },
+  {
+    "id": 2,
+    "name": "iPhone 15",
+    "price": 14000000,
+    "imageUrl": "http://10.0.2.2:5000/images/iphone15.jpg",
+    "description": "Điện thoại iPhone 15 với thiết kế gọn gàng và màu sắc trẻ trung. Sản phẩm chính hãng, phục vụ liên lạc, chụp ảnh và sử dụng ứng dụng hằng ngày."
+  },
+  {
+    "id": 3,
+    "name": "Oppo Reno 10 Pro+",
+    "price": 13000000,
+    "imageUrl": "http://10.0.2.2:5000/images/oppo-reno10-pro-plus.jpg",
+    "description": "Oppo Reno 10 Pro+ có thiết kế thanh lịch, màn hình lớn và camera phục vụ nhu cầu chụp ảnh. Sản phẩm chính hãng."
+  },
+  {
+    "id": 4,
+    "name": "Oppo Reno 11F",
+    "price": 10000000,
+    "imageUrl": "http://10.0.2.2:5000/images/oppo-reno11f.jpg",
+    "description": "Oppo Reno 11F có kiểu dáng mỏng và màu sắc hiện đại. Phù hợp học tập, giải trí và kết nối hằng ngày. Sản phẩm chính hãng."
+  },
+  {
+    "id": 5,
+    "name": "Galaxy 24 Plus",
+    "price": 16500000,
+    "imageUrl": "http://10.0.2.2:5000/images/galaxy24-plus.jpg",
+    "description": "Samsung Galaxy S24 Plus có màn hình lớn và thiết kế cao cấp, phù hợp làm việc, xem nội dung và chụp ảnh. Sản phẩm chính hãng."
+  },
+  {
+    "id": 6,
+    "name": "Xiaomi 14",
+    "price": 12000000,
+    "imageUrl": "http://10.0.2.2:5000/images/xiaomi14.jpg",
+    "description": "Xiaomi 14 có thiết kế hiện đại và hiệu năng đáp ứng nhiều nhu cầu sử dụng. Sản phẩm chính hãng."
+  },
+  {
+    "id": 7,
+    "name": "Xiaomi-Redmi A3",
+    "price": 2500000,
+    "imageUrl": "http://10.0.2.2:5000/images/redmi-a3.jpg",
+    "description": "Xiaomi Redmi A3 là điện thoại phổ thông phục vụ liên lạc, học tập và giải trí cơ bản. Sản phẩm chính hãng."
+  }
+]

@@ -46,3 +46,12 @@ app.*.map.json
 
 # Widget Preview related
 .widget_preview/
+
+# ASP.NET Core and local configuration
+**/bin/
+**/obj/
+**/appsettings.Local.json
+**/appsettings.*.local.json
+.vs/
+*.user
+*.suo
