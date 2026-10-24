@@ -1,30 +1,53 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:flutter_application_1/models/phone.dart';
+import 'package:flutter_application_1/screens/phone_list_screen.dart';
+import 'package:flutter_application_1/services/phone_service.dart';
 
-import 'package:flutter_application_1/main.dart';
+// Dữ liệu cố định để kiểm tra điều hướng mà không cần khởi động SQL Server/API.
+class TestPhoneSource implements PhoneSource {
+  int? requestedId;
+
+  static const phone = Phone(
+    id: 7,
+    name: 'Điện thoại kiểm thử',
+    price: 2500000,
+    imageUrl: 'http://example.test/phone.jpg',
+    description: 'Mô tả đầy đủ của điện thoại kiểm thử.',
+  );
+
+  @override
+  Future<List<Phone>> getPhones() async => [phone];
+
+  @override
+  Future<Phone> getPhone(int id) async {
+    requestedId = id;
+    return phone;
+  }
+}
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  testWidgets('Chọn điện thoại, xem đúng chi tiết rồi quay lại danh sách', (
+    WidgetTester tester,
+  ) async {
+    final source = TestPhoneSource();
+    await tester.pumpWidget(MaterialApp(home: PhoneListScreen(source: source)));
+    await tester.pumpAndSettle();
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    expect(find.text('DANH MỤC SẢN PHẨM'), findsOneWidget);
+    expect(find.text(TestPhoneSource.phone.name), findsOneWidget);
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+    await tester.tap(find.text(TestPhoneSource.phone.name));
+    await tester.pumpAndSettle();
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    expect(source.requestedId, TestPhoneSource.phone.id);
+    expect(find.text('THÔNG TIN SẢN PHẨM'), findsOneWidget);
+    expect(find.text('Tên: ${TestPhoneSource.phone.name}'), findsOneWidget);
+    expect(find.text(TestPhoneSource.phone.description), findsOneWidget);
+
+    await tester.pageBack();
+    await tester.pumpAndSettle();
+    expect(find.text('DANH MỤC SẢN PHẨM'), findsOneWidget);
+    expect(find.text(TestPhoneSource.phone.name), findsOneWidget);
   });
 }
