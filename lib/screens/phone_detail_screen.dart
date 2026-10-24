@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../models/phone.dart';
+import '../utils/format_vnd.dart';
 import '../services/phone_service.dart';
 import '../widgets/error_view.dart';
 import '../widgets/phone_image.dart';
@@ -51,7 +52,10 @@ class _PhoneDetailScreenState extends State<PhoneDetailScreen> {
               children: [
                 Text(
                   'Tên: ${p.name}',
-                  style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 const SizedBox(height: 8),
                 PhoneImage(
@@ -61,10 +65,15 @@ class _PhoneDetailScreenState extends State<PhoneDetailScreen> {
                   fit: BoxFit.contain,
                 ),
                 const SizedBox(height: 8),
-                Text('Giá: ${p.price} đ', style: const TextStyle(fontSize: 16)),
+                Text(
+                  'Giá: ${formatVnd(p.price)}',
+                  style: const TextStyle(fontSize: 16),
+                ),
                 const SizedBox(height: 12),
-                const Text('Mô tả',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                const Text(
+                  'Mô tả',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
                 const SizedBox(height: 4),
                 Text(p.description),
               ],

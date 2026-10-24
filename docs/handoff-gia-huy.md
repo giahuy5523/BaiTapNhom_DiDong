@@ -15,8 +15,8 @@ CSDL, dữ liệu 7 sản phẩm, EF Core DbContext, hai API, lỗi JSON, phục
 
 ## Phần Thanh Sơn còn thực hiện
 
-Model/service Flutter, màn danh sách, màn chi tiết, điều hướng, định dạng tiền và các trạng thái tải/trống/lỗi; cấu hình Android Internet/HTTP phát triển. T05–T08 và luồng Flutter thật T09–T11 chỉ chốt sau khi Sơn hoàn thành; backend test không thay thế các ca UI này.
+Flutter hiện có model/service HTTP, màn danh sách và chi tiết, điều hướng, định dạng tiền, trạng thái tải/trống/lỗi; cấu hình HTTP chỉ áp dụng cho bản Android debug. Cần kiểm thử T05–T08, tích hợp API thật T09–T11 và cập nhật test-results.md trước khi xác nhận đạt.
 
 ## Mốc tích hợp
 
-Huy chạy DB/API trên máy demo; Sơn đổi từ mẫu sang HTTP, thử hai id khác nhau, xem ảnh và quay lại. Cả hai đối chiếu với DB, ghi kết quả và chụp hai màn. Không báo toàn bộ bài đã xong khi Flutter còn là ứng dụng mẫu.
+Huy chạy DB/API trên máy demo; Sơn chạy Flutter với API mặc định, thử hai id khác nhau, xem ảnh và quay lại. Cả hai đối chiếu với DB, ghi kết quả và chụp hai màn. Chỉ xác nhận hoàn tất sau khi các ca Flutter và clone sạch đều đạt.

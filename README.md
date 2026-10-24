@@ -1,6 +1,6 @@
 # Bài tập nhóm Di động Bài tập 01
 
-Hiển thị điện thoại bằng Flutter, lấy dữ liệu từ ASP.NET Core API và SQL Server. Gia Huy phụ trách backend/CSDL; Thanh Sơn phụ trách hai màn Flutter. Project Flutter giữ nguyên ở thư mục gốc để Sơn phát triển tiếp; hiện vẫn là ứng dụng mẫu, chưa có giao diện điện thoại.
+Hiển thị điện thoại bằng Flutter, lấy dữ liệu từ ASP.NET Core API và SQL Server. Gia Huy phụ trách backend/CSDL; Thanh Sơn phụ trách hai màn Flutter. Project Flutter ở thư mục gốc đã có màn danh sách, màn chi tiết và điều hướng. Mặc định ứng dụng gọi API; có thể bật dữ liệu mẫu bằng --dart-define=USE_MOCK=true.
 
 ## Cấu trúc
 

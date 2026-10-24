@@ -30,6 +30,6 @@ DB kiểm thử tạm được tạo với tên riêng ngẫu nhiên và đã x�
 
 Đây là phần backend của T11. Không dùng tệp cấu hình thật đã commit sẵn; cấu hình cục bộ được tạo riêng theo hướng dẫn. Thư mục Flutter không bị sửa trong nhánh Gia Huy.
 
-## Chưa chốt phần Flutter
+## Trạng thái kiểm tra Flutter
 
-T05–T08 giao diện, T09 thông báo trên ứng dụng, T10 luồng hai màn Flutter và phần Flutter của T11 chờ Thanh Sơn triển khai. Project Flutter hiện vẫn là ứng dụng mẫu; không đánh dấu các ca này đạt. Việc API truy cập được từ Android không đồng nghĩa UI Flutter đã hoàn thành.
+Đã có model, service HTTP/mock, màn danh sách và chi tiết, điều hướng, trạng thái tải/trống/lỗi, thử lại và ảnh thay thế. flutter analyze --no-pub đạt không lỗi. Test widget điều hướng đã được viết nhưng chưa xác nhận chạy: flutter test --no-pub làm Flutter CLI lỗi giải mã UTF-8 tại file LICENSE của package trong Pub cache. Chưa có kết quả kiểm thử tích hợp Flutter với API/SQL thật cho T05–T11; cần chạy trên môi trường demo và ghi lại kết quả trước khi chốt.

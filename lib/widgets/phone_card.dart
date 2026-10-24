@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../models/phone.dart';
+import '../utils/format_vnd.dart';
 import 'phone_image.dart';
 
 class PhoneCard extends StatelessWidget {
@@ -26,7 +27,10 @@ class PhoneCard extends StatelessWidget {
                 children: [
                   Text(
                     phone.name,
-                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
                   ),
                   const SizedBox(height: 4),
                   Text(
@@ -36,7 +40,7 @@ class PhoneCard extends StatelessWidget {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    'Giá: ${phone.price} đ',
+                    'Giá: ${formatVnd(phone.price)}',
                     style: const TextStyle(color: Colors.red),
                   ),
                 ],
