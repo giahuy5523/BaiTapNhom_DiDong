@@ -1,13 +1,17 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
+    <!-- Dùng .NET 10 theo SDK trên máy; không phải yêu cầu bắt buộc của đề bài. -->
     <TargetFramework>net10.0</TargetFramework>
+    <!-- Bật phân tích khả năng null và tự thêm các using thông dụng khi biên dịch. -->
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <!-- Khóa cả phụ thuộc gián tiếp trong packages.lock.json để máy khác khôi phục cùng phiên bản. -->
     <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
   </PropertyGroup>
   <ItemGroup>
+    <!-- Bộ cung cấp EF Core dịch LINQ thành SQL và kết nối SQL Server. -->
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="10.0.11" />
-    <!-- Override SqlClient dependency with Microsoft security-patched version. -->
+    <!-- Ghim bản đã vá thay cho phụ thuộc gián tiếp của SqlClient; đây không phải chức năng đăng nhập của bài. -->
     <PackageReference Include="System.Security.Cryptography.Pkcs" Version="10.0.13" />
   </ItemGroup>
 </Project>
