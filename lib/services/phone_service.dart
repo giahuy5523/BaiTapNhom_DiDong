@@ -24,31 +24,36 @@ abstract class PhoneSource {
 }
 
 class PhoneService implements PhoneSource {
-  PhoneService({http.Client? client}) : _client = client ?? http.Client();
+  PhoneService({http.Client? client, String? baseUrl})
+    : _client = client ?? http.Client(),
+      _baseUrl = (baseUrl ?? ApiConfig.baseUrl).trim().replaceFirst(
+        RegExp(r'/+$'),
+        '',
+      );
   final http.Client _client;
+  final String _baseUrl;
 
   @override
-  Future<List<Phone>> getPhones() async {
-    final body = await _get('/api/phones');
+  Future<List<Phone>> getPhones() => _get('/api/phones', (body) {
     return (body as List)
         .map((e) => Phone.fromJson(e as Map<String, dynamic>))
         .toList();
-  }
+  });
 
   @override
-  Future<Phone> getPhone(int id) async {
-    final body = await _get('/api/phones/$id');
+  Future<Phone> getPhone(int id) => _get('/api/phones/$id', (body) {
     return Phone.fromJson(body as Map<String, dynamic>);
-  }
+  });
 
-  Future<dynamic> _get(String path) async {
-    final uri = Uri.parse('${ApiConfig.baseUrl}$path');
+  // Đặt cả giải mã JSON và ánh xạ model trong cùng try/catch để bắt đúng lỗi cấu trúc.
+  Future<T> _get<T>(String path, T Function(dynamic) decode) async {
     try {
+      final uri = Uri.parse('$_baseUrl$path');
       final res = await _client
           .get(uri, headers: {'Accept': 'application/json'})
           .timeout(ApiConfig.timeout);
       final text = utf8.decode(res.bodyBytes); // giữ đúng tiếng Việt
-      if (res.statusCode == 200) return jsonDecode(text);
+      if (res.statusCode == 200) return decode(jsonDecode(text));
       throw _errorFrom(res.statusCode, text);
     } on TimeoutException {
       throw const ApiException('TIMEOUT', 'Máy chủ phản hồi quá lâu');
@@ -66,11 +71,9 @@ class PhoneService implements PhoneSource {
   ApiException _errorFrom(int status, String body) {
     try {
       final m = jsonDecode(body) as Map<String, dynamic>;
-      return ApiException(
-          m['code'] as String, m['message'] as String, status);
+      return ApiException(m['code'] as String, m['message'] as String, status);
     } catch (_) {
-      return ApiException(
-          'HTTP_$status', 'Máy chủ gặp lỗi ($status)', status);
+      return ApiException('HTTP_$status', 'Máy chủ gặp lỗi ($status)', status);
     }
   }
 }

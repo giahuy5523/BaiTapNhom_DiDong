@@ -30,6 +30,28 @@ DB kiểm thử tạm được tạo với tên riêng ngẫu nhiên và đã x�
 
 Đây là phần backend của T11. Không dùng tệp cấu hình thật đã commit sẵn; cấu hình cục bộ được tạo riêng theo hướng dẫn. Thư mục Flutter không bị sửa trong nhánh Gia Huy.
 
-## Trạng thái kiểm tra Flutter
+## Kiểm tra sau sửa lỗi toàn dự án
 
-Đã có model, service HTTP/mock, màn danh sách và chi tiết, điều hướng, trạng thái tải/trống/lỗi, thử lại và ảnh thay thế. flutter analyze --no-pub đạt không lỗi. Test widget điều hướng đã được viết nhưng chưa xác nhận chạy: flutter test --no-pub làm Flutter CLI lỗi giải mã UTF-8 tại file LICENSE của package trong Pub cache. Chưa có kết quả kiểm thử tích hợp Flutter với API/SQL thật cho T05–T11; cần chạy trên môi trường demo và ghi lại kết quả trước khi chốt.
+Ngày 24/10/2026. Đã sửa các mục QA01–QA05 trong báo cáo tester: hai nút tải lại, URL có dấu / cuối, lỗi ánh xạ JSON, mẫu Redmi A3 và tài liệu tên nhánh/trạng thái kiểm thử.
+
+| Kiểm tra | Kết quả |
+|---|---|
+| Flutter analyze | Đạt, không có vấn đề |
+| Flutter test | 23/23 đạt |
+| Ba ca trước đây lỗi setState | Đạt: danh sách rỗng/tải lại, mất mạng/thử lại, chi tiết lỗi/thử lại |
+| JSON sai root hoặc thiếu trường | Đạt, trả BAD_RESPONSE thay vì để TypeError lọt ra |
+| Base URL có/không có dấu / cuối và khoảng trắng ngoài | Đạt, endpoint không bị ghép thành //api/phones |
+| Mã lỗi HTTP 400/404/500 | Đạt, giữ code và status cho giao diện |
+| HTTP trả lỗi không phải JSON, timeout, mất kết nối | Đạt |
+| Dữ liệu mock | Đạt, dùng chung JSON bàn giao, gồm giá Redmi A3 2.500.000 đ |
+| Backend Release warnaserror | Đạt, 0 lỗi và 0 cảnh báo |
+
+Bộ test mới nằm tại test/phone_states_test.dart và test/phone_service_test.dart; giữ bài điều hướng tại test/widget_test.dart. Việc từng ghi lỗi LICENSE của Pub cache không còn là trạng thái hiện tại: toàn bộ flutter test đã chạy thành công trên máy này.
+
+Ổ D từng hết dung lượng khi build APK. Đã thêm scripts/Use-BuildDirectory.ps1 để ghi phần build lớn sang thư mục còn chỗ bằng junction; không xóa tệp cá nhân và không thay đổi vị trí source. Đã phục hồi cache Gradle bị khóa sau lỗi đầy ổ và build APK debug thành công từ chính project ổ D, với thư mục build thực tế trên ổ C. Service/model Flutter thật tiếp tục đọc đủ 7 sản phẩm và ảnh qua API/SQL; URL base có dấu / cuối đã gọi thành công. Trạng thái kiểm tra trực tiếp thiết bị được ghi riêng bên dưới.
+
+### Kiểm tra APK trên Pixel 8
+
+Đã cài APK debug vừa build và khởi chạy trên phiên Pixel_8 tạm, không ghi thay đổi lên dữ liệu máy ảo gốc. Cây trợ năng của ứng dụng ghi nhận đủ 7 tên điện thoại, mô tả và giá theo dữ liệu SQL thật, trong đó Redmi A3 2.500.000 đ. Không phát hiện ngoại lệ Flutter/AndroidRuntime trong lần kiểm tra log ứng dụng này.
+
+Ảnh chụp từ phiên máy ảo chạy ẩn chỉ có nền đen/thanh hệ thống; chưa xác định đầy đủ phần hiển thị đồ họa và thao tác chạm ở chế độ này. Không dùng ảnh đó làm minh chứng giao diện và không đánh dấu luồng chạm hai màn trên thiết bị là đạt. Luồng điều hướng, quay lại và phục hồi lỗi đã được kiểm chứng trong widget test. Cần mở máy ảo bình thường để xác nhận trực quan cuối cùng khi demo.

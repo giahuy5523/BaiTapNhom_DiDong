@@ -25,7 +25,12 @@ class _PhoneDetailScreenState extends State<PhoneDetailScreen> {
     _future = widget.source.getPhone(widget.id);
   }
 
-  void _reload() => setState(() => _future = widget.source.getPhone(widget.id));
+  void _reload() {
+    // Callback của setState chỉ gán trạng thái, không trả Future cho Flutter.
+    setState(() {
+      _future = widget.source.getPhone(widget.id);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
