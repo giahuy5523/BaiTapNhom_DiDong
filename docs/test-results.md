@@ -55,3 +55,9 @@ Bộ test mới nằm tại test/phone_states_test.dart và test/phone_service_t
 Đã cài APK debug vừa build và khởi chạy trên phiên Pixel_8 tạm, không ghi thay đổi lên dữ liệu máy ảo gốc. Cây trợ năng của ứng dụng ghi nhận đủ 7 tên điện thoại, mô tả và giá theo dữ liệu SQL thật, trong đó Redmi A3 2.500.000 đ. Không phát hiện ngoại lệ Flutter/AndroidRuntime trong lần kiểm tra log ứng dụng này.
 
 Ảnh chụp từ phiên máy ảo chạy ẩn chỉ có nền đen/thanh hệ thống; chưa xác định đầy đủ phần hiển thị đồ họa và thao tác chạm ở chế độ này. Không dùng ảnh đó làm minh chứng giao diện và không đánh dấu luồng chạm hai màn trên thiết bị là đạt. Luồng điều hướng, quay lại và phục hồi lỗi đã được kiểm chứng trong widget test. Cần mở máy ảo bình thường để xác nhận trực quan cuối cùng khi demo.
+
+### Khắc phục màn hình đen của Pixel 8
+
+Đã tái hiện màn hình đen trên cửa sổ máy ảo bình thường, nên giới hạn trước đó không chỉ là vấn đề chụp ảnh của phiên chạy ẩn. Kiểm tra thấy Pixel_8 dùng Graphics auto, Android 37.1. Thử tắt Impeller riêng vẫn đen. Cold boot với Graphics software đã phục hồi hình ảnh danh sách cùng ảnh thật và mở được chi tiết iPhone 15 pro Max bằng thao tác chạm. Đã lưu cấu hình Software/Cold Boot cục bộ và giữ nguyên dữ liệu AVD. Không sửa renderer trong mã ứng dụng cho mọi thiết bị.
+
+Kiểm chứng sau khi lưu cấu hình và khởi động lại: Graphics software được đọc từ config.ini, không truyền GPU override. Ảnh chụp thật đã hiện thanh tiêu đề xanh, nội dung danh sách và ảnh điện thoại. Đã thao tác vào iPhone 15 pro Max (18.000.000 đ), quay lại bằng nút trên giao diện, mở iPhone 15 (14.000.000 đ) rồi quay lại danh sách; tất cả đạt với API/SQL thật. Giới hạn màn hình đen và thao tác chạm đã ghi ở mục trước nay đã được xử lý trên máy demo này.

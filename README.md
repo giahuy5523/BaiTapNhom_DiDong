@@ -77,6 +77,14 @@ flutter build apk --debug
 
 Mặc định script dùng thư mục `Documents/Codex/BuildCache/BaiTapNhom_DiDong` của tài khoản hiện tại. Có thể chọn đích bằng `-Directory 'C:\duong-dan-build'`. Kiểm tra đích nằm trên ổ còn dung lượng. Script tạo junction tại `project/build`, không di chuyển mã nguồn và không đổi cấu hình Flutter toàn máy. Nếu đã có build cũ, chạy `flutter clean` rồi thực hiện lại script. Sau những lần `flutter clean` khác, cần chạy lại script nếu junction bị xóa. Thư mục build vẫn được Git bỏ qua. Các cache nhỏ của Gradle/Dart có thể vẫn ở ổ project; vẫn cần giữ dung lượng trống cho hệ điều hành và công cụ.
 
+## Pixel 8 bị đen màn hình
+
+Trên máy demo đã tái hiện tình trạng chỉ thấy thanh hệ thống dù Flutter đã dựng cây giao diện và API trả dữ liệu. Tắt Impeller riêng không khắc phục. Cold boot với Graphics Software đã hiển thị lại danh sách/ảnh và mở được chi tiết sản phẩm mà không đổi mã Flutter.
+
+Trong Android Studio: Device Manager → dừng Pixel 8 → sửa thiết bị → Additional Settings/Emulated Performance → Graphics chọn Software → lưu → Cold Boot Now. Không chọn Wipe Data vì không cần xóa dữ liệu máy ảo. Tên các mục có thể khác đôi chút theo bản Android Studio.
+
+Sau khi máy ảo khởi động xong, chạy lại `flutter run`. Giữ API chạy ở terminal riêng. Cấu hình đồ họa thuộc từng máy và không đi theo git pull; Sơn chỉ cần đổi nếu máy Sơn cũng gặp hiện tượng này. Hướng dẫn chính thức: https://developer.android.com/studio/run/emulator-acceleration#accel-graphics
+
 ## Git và phạm vi
 
 Gia Huy: `feature/gia-huy-api-db`. Thanh Sơn: `thanh-son`. Không sửa cùng lúc tệp chung; review Pull Request trước khi merge vào main. Xem [kiểm thử](docs/test-results.md) để xem kết quả backend, Flutter và những bước cần xác nhận trên thiết bị.
